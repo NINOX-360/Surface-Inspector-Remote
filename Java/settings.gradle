@@ -1,0 +1,4 @@
+rootProject.name = 'Java'
+
+include 'apps'
+include 'libs'

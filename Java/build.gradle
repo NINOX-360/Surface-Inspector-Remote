@@ -1,0 +1,33 @@
+allprojects {
+    version = '1.0-SNAPSHOT' // Set your version
+    group = 'ninox360.remote'
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+    sourceCompatibility = '1.8'
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.1'
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+        repositories {
+            mavenLocal() // Publishes to the local Maven repository
+        }
+    }
+}
