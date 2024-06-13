@@ -1,0 +1,13 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Java class files
+*.class
+
+# Gradle build output
+.gradle/
+build/
