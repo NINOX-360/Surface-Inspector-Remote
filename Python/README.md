@@ -1,4 +1,3 @@
-
 # Surface Inspector Remote Python Library + Demo
 
 This library provides utilities for interacting with the Surface Inspector device through HTTP communication, handling tasks such as packet construction, server interaction, serialization and deserialization, image requests, and error handling.
@@ -111,19 +110,77 @@ To use this library in your own project, you can copy the `libs` directory into 
 
 Alternatively, you can package this library and install it using `pip`:
 
-1. **Package the Library**: Create a `setup.py` file if it doesn't exist and include the necessary configurations.
+#### 1. **Install the Library**: 
+Create a local package directory:
 
-2. **Install the Library**: Navigate to the root directory of the library and run:
+Make sure you are in the Remote API Python Directory 
+```sh
+Surface-Inspector-Remote/Python
+```
 
-    ```sh
-    pip install .
-    ```
+On macOS and Linux:
+    
+   ```sh
+   mkdir -p ~/python-packages
+   ```
 
-3. **Import the Library**: Import the necessary modules in your project files:
+On Windows:
+   ```sh
+   mkdir %USERPROFILE%\python-packages
+   ```
 
-    ```python
-    from surface_inspector_remote.RemoteApi import RemoteAPI
-    ```
+#### 2. **Install the API to the target Directory:**
+Within the Python directory of the API, install the library to package directory
+
+On macOS and Linux:
+   ```sh
+   pip install --target ~/python-packages .
+   ```
+
+On Windows:
+   ```sh
+   pip install --target %USERPROFILE%\python-packages .
+   ```
+
+#### 3. **Set the installed library path:**
+
+On macOS and Linux:
+   ```sh
+   echo 'export PYTHONPATH=$PYTHONPATH:~/python-packages' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
+On Windows:
+   ```sh
+   setx PYTHONPATH "%PYTHONPATH%;%USERPROFILE%\python-packages"
+   ```
+
+Verify your install via:
+   ```sh
+   echo $PYTHONPATH
+   ```
+
+#### 4. **Set up venv in your project**:
+Within your new project, create a venv environment
+
+On macOS and Linux:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+On Windows:
+   ```sh
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+#### 5. **Import the Library**: 
+Import the necessary API module into your project:
+
+   ```python
+   from libs.RemoteApi import RemoteAPI
+   ```
 
 ## Contributing
 
