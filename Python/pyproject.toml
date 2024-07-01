@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SIRemote"
+version = "1.0.0"
+authors = [
+    { name = "Maxim Dossioukov", email = "support@ninox360.com" },
+]
+description = "API for remote interaction with the Ninox360 Surface Inspector 3D scanner"
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    'requests',
+    'PyYAML',
+    'Pillow'
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = { text = "Apache-2.0" }
+
+[project.urls]
+Homepage = "https://github.com/NINOX-360/Surface-Inspector-Remote"
+Issues = "https://github.com/NINOX-360/Surface-Inspector-Remote/issues"
