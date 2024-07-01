@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-from HttpCommunicationUtil import HttpCommunicationUtil
+from .HttpCommunicationUtil import HttpCommunicationUtil
 from PIL import Image
 
 util = HttpCommunicationUtil()
