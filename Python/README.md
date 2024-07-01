@@ -1,4 +1,3 @@
-
 # Surface Inspector Remote Python Library + Demo
 
 This library provides utilities for interacting with the Surface Inspector device through HTTP communication, handling tasks such as packet construction, server interaction, serialization and deserialization, image requests, and error handling.
@@ -111,19 +110,67 @@ To use this library in your own project, you can copy the `libs` directory into 
 
 Alternatively, you can package this library and install it using `pip`:
 
-1. **Package the Library**: Create a `setup.py` file if it doesn't exist and include the necessary configurations.
+#### 1. **Package the Library**: 
+   Create a `setup.py` file if it doesn't exist and include the necessary configurations.
 
-2. **Install the Library**: Navigate to the root directory of the library and run:
+#### 2. **Install the Library**: 
+Navigate to the root directory of the library, Create a local package directory:
 
-    ```sh
-    pip install .
-    ```
+On macOS and Linux:
+    
+   ```sh
+   mkdir -p ~/python-packages
+   ```
 
-3. **Import the Library**: Import the necessary modules in your project files:
+On Windows:
+   ```sh
+   mkdir %USERPROFILE%\python-packages
+   ```
 
-    ```python
-    from surface_inspector_remote.RemoteApi import RemoteAPI
-    ```
+#### 3. **Install the API to the target Directory:**
+On macOS and Linux:
+   ```sh
+   pip install --target ~/python-packages .
+   ```
+
+On Windows:
+   ```sh
+   pip install --target %USERPROFILE%\python-packages .
+   ```
+
+#### 4. **Set up venv in your project**: 
+Within the new project, create your venv environment
+
+On macOS and Linux:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+On Windows:
+   ```sh
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+#### 5. **Set the installed library path:**
+   On macOS and Linux:
+   ```sh
+   echo 'export PYTHONPATH=$PYTHONPATH:~/python-packages' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
+   On Windows:
+   ```sh
+   setx PYTHONPATH "%PYTHONPATH%;%USERPROFILE%\python-packages"
+   ```
+
+
+#### 6. **Import the Library**: Import the necessary modules in your project files:
+
+   ```python
+   from surface_inspector_remote.RemoteApi import RemoteAPI
+   ```
 
 ## Contributing
 
