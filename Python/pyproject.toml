@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "SIRemote"
-version = "1.0.0"
+version = "1.1.1"
 authors = [
     { name = "Maxim Dossioukov", email = "support@ninox360.com" },
 ]
@@ -21,6 +21,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 license = { text = "Apache-2.0" }
+
+[project.scripts]
+run_python_demo = "apps.RemoteInteractionDemo:main"
 
 [project.urls]
 Homepage = "https://github.com/NINOX-360/Surface-Inspector-Remote"

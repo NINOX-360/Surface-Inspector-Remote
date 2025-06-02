@@ -10,30 +10,21 @@ sys.path.insert(0, os.path.join(current_dir, '..', 'libs'))
 # Insert the apps path
 sys.path.insert(0, current_dir)
 
-from libs.RemoteApi import RemoteAPI
+from SIRemote import RemoteAPI
 
 api = RemoteAPI()
 server_secret: str = 'k28b1'
 url_base: str = 'https://localhost:3003'
 
 
-def checkForFailure():
-    """
-    Error handling block the demonstration code
-    :param api:
-    :return:
-    """
-    # print_formated_debug(api)
+def check_for_failure():
+    """ Error handling for demo """
     if not api.get_response_status().lower() == "success":
         raise IOError(f"Remote interaction failed: {api.get_response_msg()}")
 
 
 def print_formated_debug() -> None:
-    """Prints the Response packet
-
-    :param api: instance of the RemoteAPI
-    :return: None
-    """
+    """Prints the Response packet from the global `api` instance."""
 
     print("DEBUG | PRINTING FORMATED RESPONSE INFO")
     print(f'RESPONSE MSG: {api.get_response_msg()}')
@@ -53,7 +44,7 @@ def main() -> None:
 
         # register the device
         api.send_register(server_secret)
-        checkForFailure()
+        check_for_failure()
 
         # request an image
         image = api.send_capture_image_frame()
@@ -62,9 +53,23 @@ def main() -> None:
         # save that image to disk
         api.save_image_to_disk(image)
 
+        # toggle the QR and Stillness requirement
+        api.send_stillness_required(False)
+        check_for_failure()
+
+        api.send_marker_required(True)
+        check_for_failure()
+
+        # set the camera settings
+        api.send_set_camera_exposure(10000000)
+        check_for_failure()
+
+        api.send_set_camera_sensitivity(800)
+        check_for_failure()
+
         # get the scanner state and
         api.send_get_state()
-        checkForFailure()
+        check_for_failure()
     except Exception as e:
         print(f"Exception caught during demo: {e}")
 
