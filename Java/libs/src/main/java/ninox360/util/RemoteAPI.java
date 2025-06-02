@@ -118,6 +118,54 @@ public class RemoteAPI {
     }
 
     /**
+     * Sets the camera stillness requirement.
+     *
+     * @param state: Boolean indicating if the stillness is required prior to scanning, true=on false=off
+     * @throws IOException An exception will be thrown if any process fails,
+     *                     detailed information will be displayed depending on the process
+     */
+    public void sendStillnessRequired(boolean state) throws IOException {
+        String commandPacket = HttpCommunicationUtil.constructPacket("", clientSecret, 0, "REQUIRE_STILL", Boolean.toString(state));
+        setResponse(util.sendPacketAndDeserializeYaml(commandPacket, HttpCommunicationUtil.ipAddressOut));
+    }
+
+    /**
+     * Sets the camera QR marker requirement.
+     *
+     * @param state: Boolean indicating if the QR marker is required prior to scanning, true=on false=off
+     * @throws IOException An exception will be thrown if any process fails,
+     *                     detailed information will be displayed depending on the process
+     */
+    public void sendMarkerRequired(boolean state) throws IOException {
+        String commandPacket = HttpCommunicationUtil.constructPacket("", clientSecret, 0, "REQUIRE_MARKER", Boolean.toString(state));
+        setResponse(util.sendPacketAndDeserializeYaml(commandPacket, HttpCommunicationUtil.ipAddressOut));
+    }
+
+    /**
+     * Sets the camera sensor exposure time (nanoseconds) aka shutter speed.
+     *
+     * @param exposure_ns, exposure time aka shutter speed, represented in nanoseconds
+     * @throws IOException An exception will be thrown if any process fails,
+     *                     detailed information will be displayed depending on the process
+     */
+    public void sendSetCameraExposure(long exposure_ns) throws IOException {
+        String commandPacket = HttpCommunicationUtil.constructPacket("", clientSecret, 0, "EXPOSURE", Long.toString(exposure_ns));
+        setResponse(util.sendPacketAndDeserializeYaml(commandPacket, HttpCommunicationUtil.ipAddressOut));
+    }
+
+    /**
+     * Sets the camera sensor sensitivity aka ISO.
+     *
+     * @param sensitivity_iso, exposure time aka shutter speed, represented in nanoseconds
+     * @throws IOException An exception will be thrown if any process fails,
+     *                     detailed information will be displayed depending on the process
+     */
+    public void sendSetCameraSensitivity(int sensitivity_iso) throws IOException {
+        String commandPacket = HttpCommunicationUtil.constructPacket("", clientSecret, 0, "SENSITIVITY", Integer.toString(sensitivity_iso));
+        setResponse(util.sendPacketAndDeserializeYaml(commandPacket, HttpCommunicationUtil.ipAddressOut));
+    }
+
+    /**
      * Sets the nickname for the most recent scan/photo. The name is set in 'value'.
      *
      * @param name a String to name the Scan file

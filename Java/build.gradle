@@ -1,5 +1,5 @@
 allprojects {
-    version = '1.0-SNAPSHOT' // Set your version
+    version = '1.1.1'
     group = 'ninox360.remote'
     repositories {
         mavenCentral()
@@ -27,7 +27,7 @@ subprojects {
             }
         }
         repositories {
-            mavenLocal() // Publishes to the local Maven repository
+            mavenLocal()
         }
     }
 }

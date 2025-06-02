@@ -1,7 +1,9 @@
+import numpy as np
 from typing import Dict, Any
 
-from .HttpCommunicationUtil import HttpCommunicationUtil
 from PIL import Image
+
+from .HttpCommunicationUtil import HttpCommunicationUtil
 
 util = HttpCommunicationUtil()
 
@@ -52,6 +54,44 @@ class RemoteAPI:
         """ Requests the current scanner State. """
 
         command_packet = self.util.construct_packet('', self.client_secret, 0, 'GET_STATE', '')
+        self._set_response(util.send_packet_and_deserialize_yaml(command_packet, self.util.ipAddressOut))
+
+    def send_marker_required(self, state: bool):
+        """
+        Sets the camera Marker requirement.
+
+        :param state: Boolean indicating if the QR marker is required prior to scanning, true=on false=off
+        """
+
+        command_packet = self.util.construct_packet('', self.client_secret, 0, 'REQUIRE_MARKER', str(state).lower())
+        self._set_response(util.send_packet_and_deserialize_yaml(command_packet, self.util.ipAddressOut))
+
+    def send_stillness_required(self, state: bool):
+        """
+        Sets the camera stillness requirement.
+
+        :param state: Boolean indicating if the stillness is required prior to scanning, true=on false=off
+        """
+
+        command_packet = self.util.construct_packet('', self.client_secret, 0, 'REQUIRE_STILL', str(state).lower())
+        self._set_response(util.send_packet_and_deserialize_yaml(command_packet, self.util.ipAddressOut))
+
+    def send_set_camera_exposure(self, exposure_ns: np.int64):
+        """ Sets the exposure (shutter speed) time in nanoseconds
+
+        :param exposure_ns: exposure time in nanoseconds
+        """
+
+        command_packet = self.util.construct_packet('', self.client_secret, 0, 'EXPOSURE', str(exposure_ns))
+        self._set_response(util.send_packet_and_deserialize_yaml(command_packet, self.util.ipAddressOut))
+
+    def send_set_camera_sensitivity(self, sensitivity_iso: int):
+        """ Sets the camera sensor sensitivity, this is commonly referred to as ISO
+
+        :param sensitivity_iso: sensor sensitivity, ie: ISO 400, would be sent as 400
+        """
+
+        command_packet = self.util.construct_packet('', self.client_secret, 0, 'SENSITIVITY', str(sensitivity_iso))
         self._set_response(util.send_packet_and_deserialize_yaml(command_packet, self.util.ipAddressOut))
 
     def send_set_nickname(self, name: str):

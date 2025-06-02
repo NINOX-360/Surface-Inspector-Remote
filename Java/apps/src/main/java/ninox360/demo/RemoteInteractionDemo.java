@@ -52,6 +52,15 @@ public class RemoteInteractionDemo {
             remote.sendGetState();
             checkForFailure();
 
+            remote.sendStillnessRequired(false);
+            remote.sendMarkerRequired(true);
+
+            remote.sendSetCameraExposure(10_000_000);
+            checkForFailure();
+
+            remote.sendSetCameraSensitivity(400);
+            checkForFailure();
+
         } catch (IOException e) {
             System.err.println("Error during remote interaction: " + e.getMessage());
         }
